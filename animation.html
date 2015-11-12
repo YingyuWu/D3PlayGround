@@ -1,0 +1,41 @@
+<html>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<body>
+
+
+</body>
+</html>
+<script type="text/javascript">
+var svg = d3.select("body").append("svg")
+			.attr("id","svg")
+			.attr("width","100%")
+			.attr("height","100%");
+var data = [1,2,3,4,5,6];
+var colors = ['#1f77b4','#aec7e8','#ff7f0e','#ffbb78','#2ca02c','#98df8a','#d62728','#ff9896','#9467bd','#c5b0d5','#8c564b','#c49c94','#e377c2','#f7b6d2','#7f7f7f','#c7c7c7','#bcbd22','#dbdb8d','#17becf','#9edae5']
+var colorScale = d3.scale.category20c();
+d3.select("body").on("mouseover",function(d){
+	var position = d3.mouse(this);
+	return svg	
+	.append("circle")
+	.attr("cx",position[0])
+	.attr("cy",position[1])
+	.attr("r", function(d){
+		return 15;//Math.floor(Math.random() * 25)
+	})
+	.style("opacity",0.5)
+	//.transition()
+	//.delay(500)
+	.style("fill",colorScale)
+	//.style("fill",function(d){
+		//var n = Math.floor(Math.random() * 20)
+		//return colors[n];
+	//})
+	.transition()
+	.delay(1000)
+	.style("opacity",0.2)
+	.remove();
+})
+
+
+
+</script>
