@@ -43,9 +43,9 @@ d3.select("body").on("mouseover",function(d){
 	.styleTween("fill",function(d,i,a){
        return d3.interpolate(a, "pink"); 
 	})
-	//.transition()
-	//.duration(5000)
-	//.remove();
+	.transition()
+	.duration(1000)
+	.remove();
 
 })
 

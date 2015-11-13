@@ -1,0 +1,90 @@
+<html>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<body style="background-color:black">
+
+
+</body>
+</html>
+<script type="text/javascript">
+var svg = d3.select("body").append("svg")
+			.attr("id","svg")
+			.attr("width",1200)
+			.attr("height",1200);
+var data = [1,2,3,4,5,6];
+var colors = ['#1f77b4','#aec7e8','#ff7f0e','#ffbb78','#2ca02c','#98df8a','#d62728','#ff9896','#9467bd','#c5b0d5','#8c564b','#c49c94','#e377c2','#f7b6d2','#7f7f7f','#c7c7c7','#bcbd22','#dbdb8d','#17becf','#9edae5']
+var colorScale = d3.scale.category20c();
+var width = svg.attr("width");
+var height = svg.attr("height");
+d3.timer(showStar);
+
+function showCircle(){
+	var circles = svg	
+	.append("circle")
+	.attr("cx",function(d){
+		return Math.floor(Math.random() * width)
+	})
+	.attr("cy",function(d){
+		return Math.floor(Math.random() * height)
+	})
+	.style("fill",function(d,i){
+		var n = Math.floor(Math.random() * 19);
+		return colors[n];
+	})
+	.attr("r",0)
+	.transition()
+	.duration(1000)
+	.attr("r", function(d){
+		return Math.floor(Math.random() * 50)
+	})
+	.style("opacity",0.5)	
+	.transition()
+	.styleTween("fill",function(d,i,a){
+		var n = Math.floor(Math.random() * 19);
+       return d3.interpolate(a, colors[n]); 
+	})
+	.transition()
+	.duration(1000)
+	.attr("r",0)
+	.remove();
+}
+
+function showStar(){
+	var stars = svg	
+	.append("polygon")
+	.attr("points",function(d){
+		var size = Math.floor(Math.random() * 50)
+		var startpointX = Math.floor(Math.random() * width);
+		var startpointY = Math.floor(Math.random() * width);
+		var leftbottomX = startpointX - (size / 3);
+		var leftbottomY = startpointY + size;
+		var lefttopX = startpointX - (size / 2);
+		var lefttopY = startpointY + (size / 3);
+		var righttopX = startpointX + (size / 2);
+		var righttopY = lefttopY;
+		var rightbottomX = startpointX + (size / 3);
+		var rightbottomY = leftbottomY;
+		return startpointX + "," + startpointY + " " + leftbottomX + "," + leftbottomY + " " + righttopX + "," + righttopY + " " + lefttopX + "," + lefttopY + " " + rightbottomX + "," + rightbottomY;
+	})
+	.style("fill",function(d,i){
+		var n = Math.floor(Math.random() * 19);
+		return colors[n];
+	})
+	.style("opacity",0)
+	.transition()
+	.duration(1000)
+	.style("opacity",0.8)	
+	.transition()
+	.styleTween("fill",function(d,i,a){
+		var n = Math.floor(Math.random() * 19);
+       return d3.interpolate(a, colors[n]); 
+	})
+	.transition()
+	.duration(1000)
+	.style("opacity",0)
+	.remove();
+}
+
+
+
+
+</script>
